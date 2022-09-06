@@ -1,0 +1,49 @@
+<!-- <mat-drawer-container>
+  <mat-drawer mode="side" opened class="sidenav">Drawer content
+
+  </mat-drawer>
+  <mat-drawer-content>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </mat-drawer-content>
+</mat-drawer-container> -->
+<mat-sidenav-container class="sidebar-container">
+  <mat-sidenav [opened]="userIsAuthenticated" mode="side">
+    <!-- <mat-nav-list *ngFor="let sidemenu of sidebarmenu">
+       <a mat-list-item routerLink="/">
+        <mat-icon>dashboard</mat-icon> <span class="nav-caption">Dashboard</span>
+      </a>
+      <a mat-list-item routerLink="/transactions" >
+        <mat-icon>assessment</mat-icon> <span class="nav-caption">Transactions</span>
+      </a>
+      <a mat-list-item routerLink="/masters">
+        <mat-icon>apps</mat-icon><span class="nav-caption">Master</span>
+      </a>
+      <a mat-list-item [routerLink]="sidemenu.path">
+        <mat-icon>apps</mat-icon><span class="nav-caption">{{sidemenu.menuname}}</span>
+      </a>
+    </mat-nav-list> -->
+    <!-- <mat-nav-list *ngFor="let sidemenu of sidebarmenu">
+        <a mat-list-item *ngIf="sidemenu.submenu">
+            <mat-icon>apps</mat-icon><span class="nav-caption">{{sidemenu.menuname}}</span>
+
+          </a>
+      <a mat-list-item *ngIf="!sidemenu.submenu" [routerLink]="sidemenu.path">
+        <mat-icon>apps</mat-icon><span class="nav-caption">{{sidemenu.menuname}}</span>
+      </a>
+    </mat-nav-list> -->
+
+    <mat-nav-list>
+      <mat-list-item *ngFor="let sidemenu of sidebarmenu">
+         <a [routerLink]="[sidemenu.path]" routerLinkActive="active">
+           {{ sidemenu.menuname.toLocaleUpperCase() }}
+          </a>
+         <!-- <button mat-icon-button ><mat-icon>info</mat-icon></button> -->
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+</mat-sidenav-container>

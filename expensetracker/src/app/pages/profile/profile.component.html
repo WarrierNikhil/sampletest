@@ -1,0 +1,27 @@
+<mat-card class="profile-card">
+  <mat-card-header>
+    <mat-card-title>Profile</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <form  (submit)="onSaveProfile(profileForm)" #profileForm="ngForm" *ngIf="!isLoading">
+      <mat-form-field class="halfWidthInput">
+        <input matInput type="text" name="firstname" ngModel placeholder="First Name" #firstnameInput="ngModel" />
+        <mat-error *ngIf="firstnameInput.invalid">Please enter firstname</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="halfWidthInput">
+        <input matInput type="text" ngModel name="lastname" placeholder="Last Name" #lastnameInput="ngModel" required />
+        <mat-error *ngIf="lastnameInput.invalid">Please enter lastname </mat-error>
+      </mat-form-field>
+
+        <mat-radio-group aria-label="Select an option">
+          <mat-radio-button value="M">Male</mat-radio-button>
+          <mat-radio-button value="F">Female</mat-radio-button>
+          <mat-radio-button value="T">Transgender</mat-radio-button>
+        </mat-radio-group>
+        
+      <button color='primary' mat-raised-button type="submit" *ngIf="!isLoading">Save</button>
+    </form>
+  </mat-card-content>
+</mat-card>

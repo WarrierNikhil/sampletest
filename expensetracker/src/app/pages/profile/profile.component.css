@@ -1,0 +1,17 @@
+mat-form-field,mat-radio-group,
+textarea{
+    width: 100%;
+}
+
+mat-spinner{
+    margin: auto;
+}
+
+.halfWidthInput{
+  width: 50%;
+  display: block;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}

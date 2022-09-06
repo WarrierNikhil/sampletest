@@ -1,0 +1,54 @@
+<mat-card>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <mat-form-field>
+
+      <mat-select  placeholder="Menu Type" name="menutype" [(ngModel)]='menuTypeSelected' #menuSelect [(value)]="menuTypeSelected" [disabled]="disableSubmenu">
+          <mat-option value="M" >Main Menu</mat-option>
+          <mat-option value="S">Sub Menu</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <label>
+
+      </label>
+
+    <form  (submit)="onSaveMenu(menuForm)" #menuForm="ngForm" *ngIf="!isLoading && menuSelect.value==='M'">
+
+      <mat-form-field>
+        <input matInput type="text" name="menuname" ngModel  placeholder="menu name"  #menuInput="ngModel" required/>
+        <mat-error *ngIf="menuInput.invalid">Please enter menu name</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="text"  ngModel   name="path" placeholder="Path Name" #pathInput="ngModel"  />
+        <mat-error *ngIf="pathInput.invalid">Please enter valid path name</mat-error>
+      </mat-form-field>
+      <button color='primary' mat-raised-button type="submit" *ngIf="!isLoading">Save Menu</button>
+    </form>
+
+    <form  (submit)="onSaveSubMenu(submenuMenuForm)" #submenuMenuForm="ngForm" *ngIf="!isLoading && menuSelect.value ==='S'">
+        <mat-form-field>
+          <!-- <mat-select ngModel name="mainmenu">
+            <mat-option *ngFor="let menu of mainMenus" [value]="menu.id">
+              {{menu.menuname}}
+            </mat-option>
+          </mat-select> -->
+          <mat-label>Main Menu</mat-label>
+          <select matNativeControl required name="mainmenu" ngModel>
+            <option *ngFor="let menu of mainMenus" [value]="menu.id">
+              {{menu.menuname}}
+            </option>
+          </select>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="text" name="submenuname" ngModel  placeholder="Sub Menu Name"  #subMenuInput="ngModel" required/>
+          <mat-error *ngIf="subMenuInput.invalid">Please enter sub menu name</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="text"  ngModel   name="path" placeholder="Path Name" #subMenuPathInput="ngModel" required  />
+          <mat-error *ngIf="subMenuPathInput.invalid">Please enter valid path name</mat-error>
+        </mat-form-field>
+        <button color='primary' mat-raised-button type="submit" *ngIf="!isLoading">Save Sub Menu</button>
+      </form>
+
+  </mat-card>

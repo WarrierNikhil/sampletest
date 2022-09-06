@@ -1,0 +1,45 @@
+<!-- <mat-toolbar color='primary'>
+  <span class="spacer"></span>
+  <ul>
+    <li *ngIf="userIsAuthenticated">
+      <a mat-button routerLink='/create' routerLinkActive="mat-accent">Create</a>
+    </li>
+    <li *ngIf="!userIsAuthenticated">
+      <a mat-button routerLink='/auth/login' routerLinkActive="mat-accent"> Login</a>
+    </li>
+    <li *ngIf="!userIsAuthenticated">
+      <a mat-button routerLink='/auth/signup' routerLinkActive="mat-accent">Sign Up</a>
+    </li>
+    <li *ngIf="userIsAuthenticated">
+      <button mat-button (click)="onLogout()">Logout</button>
+    </li>
+  </ul>
+</mat-toolbar> -->
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>{{title}}</span>
+    <span class="spacer"></span>
+    <a mat-button routerLink='/auth/login' routerLinkActive="mat-accent" *ngIf="!userIsAuthenticated"> Login</a>
+    <a mat-button routerLink='/auth/signup' routerLinkActive="mat-accent" *ngIf="!userIsAuthenticated">Sign Up</a>
+    <mat-divider [vertical]="true" [inset]="true" class="topMenu"></mat-divider>
+    <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="userIsAuthenticated">
+      <mat-icon>account_box</mat-icon>
+    </button>
+
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>dialpad</mat-icon>
+        <span>Redial</span>
+      </button>
+
+      <button mat-menu-item>
+        <mat-icon>tune</mat-icon>
+        <span routerLink='/profile' routerLinkActive="mat-accent"> Profile</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item (click)="onLogout()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar-row>
