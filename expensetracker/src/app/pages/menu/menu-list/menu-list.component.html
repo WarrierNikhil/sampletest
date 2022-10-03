@@ -1,6 +1,4 @@
 
-<app-menu></app-menu>
-<br>
 <mat-spinner *ngIf="isLoading"></mat-spinner>
 <mat-accordion *ngIf="mainMenus.length >0 && !isLoading " >
   <mat-expansion-panel *ngFor="let mainmenu of mainMenus" >
@@ -12,8 +10,17 @@
     Menu Name: {{ mainmenu.menuname}}
     <br>
     Path: {{ mainmenu.path}}
+    <br>
+    <div *ngFor="let submenu of mainmenu.children">
+      id: {{submenu.id}}
+    <br>
+    Menu Name: {{ submenu.menuname}}
+    <br>
+    Path: {{ submenu.path}}
+    </div>
     <mat-action-row >
-      <a mat-button color="primary"  routerLinkActive="router-link-active">Edit</a>
+      <a mat-button color="primary"  routerLinkActive="router-link-active" [routerLink]="['/menu/edit',mainmenu.id]">Edit</a>
+      <a mat-button color="primary"  routerLinkActive="router-link-active" [routerLink]="['/menu/addsubmenu',mainmenu.id]">Add Submenu</a>
       <!-- [routerLink]="['/edit',1]" -->
       <button mat-button color="warn" >Delete</button>
     </mat-action-row>

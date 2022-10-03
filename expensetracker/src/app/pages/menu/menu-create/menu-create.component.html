@@ -1,0 +1,20 @@
+<mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form  (submit)="onSaveMenu(menuForm)" #menuForm="ngForm" *ngIf="!isLoading">
+    <mat-form-field>
+      <input matInput type="text" name="menuname" ngModel  placeholder="menu name"  #menuInput="ngModel" required/>
+      <mat-error *ngIf="menuInput.invalid">Please enter menu name</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" name="iconname" ngModel  placeholder="icon name"  #iconInput="ngModel" required/>
+      <mat-error *ngIf="iconInput.invalid">Please enter icon name</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text"  ngModel  name="path" placeholder="Path Name" #pathInput="ngModel"  />
+      <mat-error *ngIf="pathInput.invalid">Please enter valid path name</mat-error>
+    </mat-form-field>
+    <mat-checkbox ngModel name="status" #statusInput="ngModel"  >Status</mat-checkbox>
+    <br/>
+    <button color='primary' mat-raised-button type="submit" *ngIf="!isLoading">Save Menu</button>
+  </form>
+</mat-card>

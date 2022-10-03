@@ -2,9 +2,10 @@ import { Injectable } from "@angular/core";
 import { environment } from "../../environments/environment";
 import { HttpClient } from "@angular/common/http";
 
-import { MainMenu, SubMenu } from "../modal/menu.model";
+import { MainMenu} from "../modal/menu.model";
 import { map } from "rxjs/operators";
 import { Subject, Subscription } from "rxjs";
+import { Router } from '@angular/router';
 const BACKEND_URL = environment.apiUrl + "/menu";
 @Injectable({
   providedIn: "root"
@@ -13,7 +14,7 @@ export class MenuService {
   private MainMenus: MainMenu[] = [];
   private menusUpdated = new Subject<any>();
   //private mainMenuSub: Subscription;
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private router: Router) {}
 
   getMenuUpadateListner() {
     return this.menusUpdated.asObservable();
@@ -29,14 +30,24 @@ export class MenuService {
               return {
                 id: mainmenu._id,
                 menuname: mainmenu.menuname,
-                path: mainmenu.path
+                path: mainmenu.path,
+                iconname:mainmenu.iconname,
+                status :mainmenu.status,
+                children:mainmenu.children.map(submenu=>{
+                  return{
+                    id: submenu._id,
+                    menuname: submenu.menuname,
+                    path: submenu.path,
+                    iconname:submenu.iconname,
+                    status :submenu.status,
+                  };
+                })
               };
             })
           };
         })
       )
       .subscribe(result => {
-        console.log(result.MainMenus, "from getmenu list");
         this.MainMenus = result.MainMenus;
 
         this.menusUpdated.next({
@@ -45,8 +56,8 @@ export class MenuService {
       });
   }
 
-  createMainMenu(menuname: string, path: string) {
-    const menudata: MainMenu = { id: null, menuname, path };
+  createMainMenu(menuname: string,iconname:string, path: string,status:boolean) {
+    const menudata: MainMenu = { id: null, menuname, iconname,path,status };
     this.http
       .post<{ message: string; result: any }>(
         BACKEND_URL + "/mainmenu",
@@ -57,17 +68,15 @@ export class MenuService {
         this.menusUpdated.next({
           MainMenus: [...this.MainMenus]
         });
+        this.router.navigate(["/menu/menu-list"]);
       });
   }
-  createSubMenu(mainMenuId: string, subMenuName: string, subMenuPath: string) {
-    const submenuData: SubMenu = {
-      mainmenuId: mainMenuId,
-      menuname: subMenuName,
-      path: subMenuPath
-    };
-    this.http.post<{message: string; result: any}>(BACKEND_URL + "/submenu",submenuData)
+  createSubMenu(menuname: string,iconname:string, path: string,status:boolean,mainMenuId:string) {
+    const menudata: MainMenu = { id: null, menuname, iconname,path,status };
+    const queryParams = `?mainMenuId=${mainMenuId}`;
+    this.http.post<{message: string; result: any}>(BACKEND_URL + "/submenu"+queryParams,menudata)
     .subscribe(result=>{
-      console.log(result);
+      this.router.navigate(["/menu/menu-list"]);
     });
   }
 }

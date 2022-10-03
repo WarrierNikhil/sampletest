@@ -1,11 +1,9 @@
 export interface MainMenu {
   id: string;
   menuname: string;
+  iconname:string;
+  status :boolean;
   path: string;
+  children?:MainMenu[];
 }
 
-export interface SubMenu {
-  menuname: string;
-  path: string;
-  mainmenuId:string;
-}

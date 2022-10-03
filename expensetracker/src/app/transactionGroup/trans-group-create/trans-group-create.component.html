@@ -1,0 +1,15 @@
+
+<mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form [formGroup]="form" (submit)="onSaveGroup()"  *ngIf="!isLoading">
+    <mat-form-field>
+      <input matInput type="text" formControlName="groupname" placeholder="Group Name" />
+      <mat-error *ngIf="form.get('groupname').invalid">Please enter a Group Name</mat-error>
+    </mat-form-field>
+
+      <mat-checkbox  formControlName="status" >Status</mat-checkbox>
+      <br/>
+      <!-- <input matInput type="text" formControlName="groupname" placeholder="Group Name" /> -->
+
+    <button mat-raised-button color="primary">Save Group</button>
+    </form>

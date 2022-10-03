@@ -1,0 +1,36 @@
+
+mat-card{
+    width:80%;
+    margin:auto;
+}
+
+mat-form-field,
+textarea{
+    width: 100%;
+    display: block;
+}
+mat-spinner{
+    margin: auto;
+}
+
+input[type="file"]{
+    visibility: hidden;
+}
+input[type="number"]{
+    width: 100%;
+}
+.imagePreview{
+    height: 5rem;
+    margin: 1rem 0;
+    display: inline-block;
+}
+.imagePreview image,.imagePreview img{
+    height:100%;
+}
+.formlayoutDiv{
+    display: inline-block;
+    width: 48%;
+    height: auto;
+    margin: 1rem;
+    /* border: 1px solid red; */
+}

@@ -24,7 +24,6 @@ export class MenuListComponent implements OnInit, OnDestroy {
         this.mainMenus = menuData.MainMenus;
         this.isLoading=false;
       });
-    //console.log(this.mainMenus)
   }
   ngOnDestroy() {
     this.mainMenuSub.unsubscribe();

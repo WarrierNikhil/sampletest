@@ -1,0 +1,12 @@
+<mat-sidenav-container>
+  <mat-sidenav #appDrawer mode="side" [opened]="userIsAuthenticated">
+    <mat-nav-list>
+      <app-navmenu-list *ngFor="let item of navItems" [item]="item"></app-navmenu-list>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>
